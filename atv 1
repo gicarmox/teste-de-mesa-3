@@ -1,0 +1,40 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Entradas
+        double[] capitais = { 1000, 5500, 12000 };
+        double[] taxas = { 0.03, 0.0248, 0.02 };
+        int meses = 8;
+        double dias = 10;
+
+        // Tabela de resultados
+        Console.WriteLine("\n| Investimento | Capital Inicial | Taxa de Juros | Rendimento | Capital Final |");
+        Console.WriteLine("|--------------|----------------|----------------|------------|----------------|");
+
+        for (int i = 0; i < capitais.Length; i++)
+        {
+            double capitalInicial = capitais[i];
+            double taxaJuros = taxas[i];
+            
+            // Cálculo do rendimento mensal
+            double capitalAtual = capitalInicial;
+            for (int mes = 1; mes <= meses; mes++)
+            {
+                double rendimentoMensal = capitalAtual * taxaJuros;
+                capitalAtual += rendimentoMensal;
+            }
+
+            // Cálculo do rendimento para os 10 dias
+            double taxaDiaria = taxaJuros / 30; // Aproximando a taxa diária
+            double rendimentoDias = capitalAtual * taxaDiaria * dias;
+            double capitalFinalComDias = capitalAtual + rendimentoDias;
+
+            // Exibindo os resultados
+            double totalRendimento = capitalFinalComDias - capitalInicial;
+            Console.WriteLine($"| Investimento {i + 1} | {capitalInicial,14:F2} | {taxaJuros * 100,12:F2}% | {totalRendimento,10:F2} | {capitalFinalComDias,14:F2} |");
+        }
+    }
+}
